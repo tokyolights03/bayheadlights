@@ -1,6 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>BayHeadlights</title>
+<meta name="description" content="Mobile headlight restoration in Monterey, Seaside, Pacific Grove and Hollister. We come to you and bring cloudy, yellowed lenses back to clear in under an hour. From $79.">
+
+<!-- DEPLOY: every absolute URL below points at bayheadlights.com. If the site
+     goes live on a different domain, replace that host everywhere in this head
+     block, and upload og-image.png and apple-touch-icon.png to the site root. -->
+<link rel="canonical" href="https://bayheadlights.com/">
+
+<!-- Tab icon: the ember beam mark from the header, inlined so it costs no request. -->
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2032%2032'%3E%3Crect%20width='32'%20height='32'%20rx='7'%20fill='%232A2013'/%3E%3Ccircle%20cx='16'%20cy='16'%20r='8'%20fill='%23D8672E'/%3E%3Ccircle%20cx='16'%20cy='16'%20r='3.5'%20fill='%23F1E4C6'/%3E%3C/svg%3E">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta name="theme-color" content="#F1E4C6">
+
+<!-- Link previews in Messages, WhatsApp, Facebook, LinkedIn. -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="BayHeadlights">
+<meta property="og:title" content="BayHeadlights — Mobile Headlight Restoration">
+<meta property="og:description" content="We come to you anywhere on the Monterey Bay coast and bring cloudy, yellowed headlights back to clear in under an hour. From $79 a pair.">
+<meta property="og:url" content="https://bayheadlights.com/">
+<meta property="og:image" content="https://bayheadlights.com/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="BayHeadlights logo: a vintage off-road truck between palm trees under a striped sunset">
+<meta property="og:locale" content="en_US">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="BayHeadlights — Mobile Headlight Restoration">
+<meta name="twitter:description" content="We come to you anywhere on the Monterey Bay coast and bring cloudy, yellowed headlights back to clear in under an hour. From $79 a pair.">
+<meta name="twitter:image" content="https://bayheadlights.com/og-image.png">
+<meta name="twitter:image:alt" content="BayHeadlights logo: a vintage off-road truck between palm trees under a striped sunset">
+
+<!-- Local business data for Google Search and Maps. Deliberately omits address
+     and opening hours: this is a mobile, by-appointment service with no
+     storefront, so it declares areaServed instead. Add "openingHoursSpecification"
+     only if set hours ever start being offered. -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "AutoRepair",
+  "@id": "https://bayheadlights.com/#business",
+  "name": "BayHeadlights",
+  "description": "Mobile headlight restoration serving the Monterey Bay area. Wet-sanding, polishing, UV sealant and ceramic coating performed on location.",
+  "url": "https://bayheadlights.com/",
+  "image": "https://bayheadlights.com/og-image.png",
+  "logo": "https://bayheadlights.com/og-image.png",
+  "telephone": "+1-831-833-9309",
+  "email": "bayheadlights@gmail.com",
+  "priceRange": "$45-$179",
+  "currenciesAccepted": "USD",
+  "areaServed": [
+    { "@type": "City", "name": "Monterey", "address": { "@type": "PostalAddress", "addressRegion": "CA", "addressCountry": "US" } },
+    { "@type": "City", "name": "Hollister", "address": { "@type": "PostalAddress", "addressRegion": "CA", "addressCountry": "US" } },
+    { "@type": "City", "name": "Pacific Grove", "address": { "@type": "PostalAddress", "addressRegion": "CA", "addressCountry": "US" } },
+    { "@type": "City", "name": "Seaside", "address": { "@type": "PostalAddress", "addressRegion": "CA", "addressCountry": "US" } }
+  ],
+  "hasOfferCatalog": {
+    "@type": "OfferCatalog",
+    "name": "Headlight Restoration Services",
+    "itemListElement": [
+      {
+        "@type": "Offer",
+        "price": "79",
+        "priceCurrency": "USD",
+        "itemOffered": { "@type": "Service", "name": "Standard Restoration", "description": "Wet-sand and polish that clears haze and yellowing back to factory clarity. No coating." }
+      },
+      {
+        "@type": "Offer",
+        "price": "119",
+        "priceCurrency": "USD",
+        "itemOffered": { "@type": "Service", "name": "Premium + UV Sealant", "description": "Standard restoration plus a UV-resistant sealant that holds clarity longer against coastal sun and salt." }
+      },
+      {
+        "@type": "Offer",
+        "price": "179",
+        "priceCurrency": "USD",
+        "itemOffered": { "@type": "Service", "name": "Ceramic Coating Restoration", "description": "A ceramic top coat for the longest-lasting clarity offered, built to hold up for years." }
+      },
+      {
+        "@type": "Offer",
+        "price": "45",
+        "priceCurrency": "USD",
+        "itemOffered": { "@type": "Service", "name": "Maintenance Restoration", "description": "A quick recoat for previously restored lenses." }
+      }
+    ]
+  }
+}
+</script>
 <style>
   /* ---------- Tokens ----------
      A warm, sand-forward coastal palette drawn from the BayHeadlights mark:
@@ -343,7 +432,9 @@
     .reveal { opacity: 1; transform: none; }
   }
 </style>
+</head>
 
+<body>
 <div class="page">
   <a class="skip-link" href="#main">Skip to content</a>
 
@@ -610,3 +701,5 @@
     targets.forEach(function (el) { observer.observe(el); });
   })();
 </script>
+</body>
+</html>

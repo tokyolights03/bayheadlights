@@ -110,10 +110,14 @@
     --surface: #F4F9FD;
     --surface-alt: #E7F0F9;
 
-    --ink: #0E2337;
-    --ink-soft: #2A4C6B;
+    /* Text runs deliberately dark for readability: --ink-soft carries most of
+       the body copy, so it sits at 9.34:1 on --bg rather than the ~7:1 that
+       would already pass AA. On the navy bands the same goal points the other
+       way — the on-deep pair is *lighter* for the same reason. */
+    --ink: #081A2B;
+    --ink-soft: #1C3A55;
     --on-deep: #EAF3FB;
-    --on-deep-soft: #B4CFE7;
+    --on-deep-soft: #C2D9ED;
 
     --text: var(--ink);
     --text-soft: var(--ink-soft);
@@ -124,14 +128,15 @@
        before/after seam. 3.14:1 on --bg, which clears the 3:1 WCAG asks of a
        control boundary; --border is 1.77:1 and would not. */
     --rule: #5B84A8;
-    --accent: #1E6BA8;
-    --accent-strong: #13537F;
+    --accent: #1A6199;
+    --accent-strong: #0D4267;
     --accent-cool: #4FA3D6;
 
     /* The primary button is a fixed chip: it appears on both the pale ground
-       and the navy header, so its colours must not follow the surface. */
-    --btn-bg: #1E6BA8;
-    --btn-bg-hover: #13537F;
+       and the navy header, so its colours must not follow the surface. It
+       tracks the accent pair by value, which keeps one blue in play. */
+    --btn-bg: #1A6199;
+    --btn-bg-hover: #0D4267;
     --btn-fg: #F7FBFE;
 
     --font-display: 'Didot', 'Bodoni MT', Georgia, 'Times New Roman', serif;
@@ -159,7 +164,7 @@
     --border: #35557A;
     --rule: #6D93B6;
     --accent: #74B4E4;
-    --accent-strong: #9CCBEE;
+    --accent-strong: #ADD5F1;
   }
 
   /* ---------- Reset ---------- */
@@ -282,7 +287,7 @@
   }
   .btn--primary { background: var(--btn-bg); color: var(--btn-fg); }
   .btn--primary:hover { background: var(--btn-bg-hover); }
-  /* The chip keeps one colour everywhere, but on navy its fill is only 2.56:1
+  /* The chip keeps one colour everywhere, but on navy its fill is only 2.21:1
      against the band: the label stays legible while the button's edge
      disappears. A rim from the band's --rule (4.47:1) restores the boundary
      WCAG asks for, without giving the primary action a second identity. */

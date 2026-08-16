@@ -199,10 +199,17 @@
   /* ---------- Layout helpers ---------- */
   .wrap { max-width: var(--container); margin-inline: auto; padding-inline: clamp(1.25rem, 4vw, 2.5rem); }
   section { padding-block: clamp(3.5rem, 7vw, 6rem); }
+  /* The header is sticky, so an anchor jump would otherwise park the target
+     heading behind it. Clears the ~4.4rem header with room to spare. */
+  section[id], main[id] { scroll-margin-top: 5rem; }
 
   /* ---------- Header ---------- */
   .site-header {
     position: sticky; top: 0; z-index: 50;
+    /* Opaque first: a browser without color-mix drops the translucent value
+       below, and a sticky header with no background at all leaves pale nav
+       text sitting on top of whatever scrolls under it. */
+    background: var(--bg-deep);
     background: color-mix(in srgb, var(--bg-deep) 88%, transparent);
     backdrop-filter: blur(10px);
     border-bottom: 1px solid color-mix(in srgb, var(--rule) 22%, transparent);
@@ -294,7 +301,10 @@
       linear-gradient(180deg, var(--bg) 0%, transparent 30%),
       linear-gradient(0deg, var(--bg) 0%, transparent 42%);
   }
-  .palm-sway { transform-origin: 0 0; animation: palm-sway 7s ease-in-out infinite; }
+  /* transform-origin is set inline on each palm so it can name that palm's own
+     trunk base in viewBox units; an inline style wins here, so don't restate
+     it in this rule and imply it does anything. */
+  .palm-sway { animation: palm-sway 7s ease-in-out infinite; }
   .palm-sway--b { animation-duration: 8.5s; animation-delay: -2s; }
   @keyframes palm-sway {
     0%, 100% { transform: rotate(-1.1deg); }
@@ -303,8 +313,10 @@
   @media (prefers-reduced-motion: reduce) {
     .palm-sway { animation: none; }
   }
-  .hero-inner { position: relative; z-index: 1; }
-  .hero-inner { max-width: 640px; margin-inline: auto; text-align: center; }
+  .hero-inner {
+    position: relative; z-index: 1;
+    max-width: 640px; margin-inline: auto; text-align: center;
+  }
   .hero h1 { font-size: var(--fs-hero); line-height: 1.05; margin-top: 0.9rem; }
   /* The service phrase lives inside the h1 so the page's strongest heading
      carries the words people actually search, without letting them run at
@@ -490,7 +502,7 @@
 
   /* ---------- Contact ---------- */
   .contact { background: var(--bg-deep); color: var(--text); }
-  .contact h2 { font-size: var(--fs-h2); color: var(--text); }
+  .contact h2 { font-size: var(--fs-h2); }
   .contact-grid { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 3rem; align-items: center; }
   .contact-info dl { display: grid; grid-template-columns: auto 1fr; gap: 0.5rem 1.5rem; margin-top: 1.75rem; font-size: var(--fs-small); }
   .contact-info dt { color: var(--text-soft); text-transform: uppercase; letter-spacing: 0.08em; font-size: var(--fs-label); padding-top: 0.15rem; }
@@ -587,6 +599,12 @@
     .reveal { opacity: 1; transform: none; }
   }
 </style>
+<!-- .reveal starts at opacity 0 and is only ever turned on by script. If the
+     script never runs, every section below the hero - including the contact
+     buttons this page exists for - would stay invisible. -->
+<noscript><style>
+  .reveal { opacity: 1; transform: none; }
+</style></noscript>
 </head>
 
 <body>
@@ -884,7 +902,11 @@
 
 <script>
   (function () {
-    var targets = document.querySelectorAll('.reveal');
+    /* A real array, not the live NodeList: the fallback below exists for
+       browsers without IntersectionObserver, and those same browsers tend to
+       lack NodeList.prototype.forEach - so calling it there would throw and
+       leave the page permanently blank below the hero. */
+    var targets = Array.prototype.slice.call(document.querySelectorAll('.reveal'));
     if (!('IntersectionObserver' in window) || !targets.length) {
       targets.forEach(function (el) { el.classList.add('is-visible'); });
       return;

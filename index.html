@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Mobile Headlight Restoration in Monterey Bay | BayHeadlights</title>
-<meta name="description" content="Mobile headlight restoration in Monterey, Carmel, Pacific Grove, Seaside and Hollister. We come to you and clear cloudy lenses in under an hour. From $79.">
+<meta name="description" content="Mobile headlight restoration in Monterey, Carmel, Pacific Grove, Seaside and Hollister. We come to you and clear cloudy lenses. $80&ndash;$120 with ceramic coating included.">
 
 <!-- DEPLOY: every absolute URL below points at bayheadlights.com. If the site
      goes live on a different domain, replace that host everywhere in this head
@@ -20,7 +20,7 @@
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="BayHeadlights">
 <meta property="og:title" content="BayHeadlights — Mobile Headlight Restoration">
-<meta property="og:description" content="We come to you anywhere on the Monterey Bay coast and bring cloudy, yellowed headlights back to clear in under an hour. From $79 a pair.">
+<meta property="og:description" content="We come to you anywhere on the Monterey Bay coast and bring cloudy, yellowed headlights back to clear in under an hour. $80&ndash;$120 by vehicle size, ceramic coating included.">
 <meta property="og:url" content="https://bayheadlights.com/">
 <meta property="og:image" content="https://bayheadlights.com/og-image.png">
 <meta property="og:image:width" content="1200">
@@ -30,7 +30,7 @@
 
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="BayHeadlights — Mobile Headlight Restoration">
-<meta name="twitter:description" content="We come to you anywhere on the Monterey Bay coast and bring cloudy, yellowed headlights back to clear in under an hour. From $79 a pair.">
+<meta name="twitter:description" content="We come to you anywhere on the Monterey Bay coast and bring cloudy, yellowed headlights back to clear in under an hour. $80&ndash;$120 by vehicle size, ceramic coating included.">
 <meta name="twitter:image" content="https://bayheadlights.com/og-image.png">
 <meta name="twitter:image:alt" content="BayHeadlights logo: a vintage off-road truck between palm trees under a striped sunset">
 
@@ -44,13 +44,13 @@
   "@type": "AutoRepair",
   "@id": "https://bayheadlights.com/#business",
   "name": "BayHeadlights",
-  "description": "Mobile headlight restoration serving the Monterey Bay area. Wet-sanding, polishing, UV sealant and ceramic coating performed on location.",
+  "description": "Mobile headlight restoration serving the Monterey Bay area. Wet-sanding, polishing and a ceramic top coat, performed on location and priced by vehicle size.",
   "url": "https://bayheadlights.com/",
   "image": "https://bayheadlights.com/og-image.png",
   "logo": "https://bayheadlights.com/og-image.png",
   "telephone": "+1-831-833-9309",
   "email": "bayheadlights@gmail.com",
-  "priceRange": "$45-$179",
+  "priceRange": "$80-$120",
   "currenciesAccepted": "USD",
   "sameAs": ["https://www.instagram.com/bayheadlights/"],
   "areaServed": [
@@ -66,27 +66,14 @@
     "itemListElement": [
       {
         "@type": "Offer",
-        "price": "79",
-        "priceCurrency": "USD",
-        "itemOffered": { "@type": "Service", "name": "Standard Restoration", "description": "Wet-sand and polish that clears haze and yellowing back to factory clarity. No coating." }
-      },
-      {
-        "@type": "Offer",
-        "price": "119",
-        "priceCurrency": "USD",
-        "itemOffered": { "@type": "Service", "name": "Premium + UV Sealant", "description": "Standard restoration plus a UV-resistant sealant that holds clarity longer against coastal sun and salt." }
-      },
-      {
-        "@type": "Offer",
-        "price": "179",
-        "priceCurrency": "USD",
-        "itemOffered": { "@type": "Service", "name": "Ceramic Coating Restoration", "description": "A ceramic top coat for the longest-lasting clarity offered, built to hold up for years." }
-      },
-      {
-        "@type": "Offer",
-        "price": "45",
-        "priceCurrency": "USD",
-        "itemOffered": { "@type": "Service", "name": "Maintenance Restoration", "description": "A quick recoat for previously restored lenses." }
+        "priceSpecification": {
+          "@type": "PriceSpecification",
+          "minPrice": "80",
+          "maxPrice": "120",
+          "priceCurrency": "USD",
+          "valueAddedTaxIncluded": false
+        },
+        "itemOffered": { "@type": "Service", "name": "Full Headlight Restoration", "description": "Wet-sand, polish and a ceramic top coat at no extra charge, performed on location. Priced by vehicle size. A two-year warranty is available." }
       }
     ]
   }
@@ -370,6 +357,34 @@
     text-align: center; color: var(--text-soft); font-size: var(--fs-small);
     max-width: 44ch; margin: 0 auto 2.5rem;
   }
+  /* There is one restoration, not a ladder of tiers, so the price lives in a
+     single wide panel above the grid and the cards below it describe what is
+     bundled into that one price rather than competing with each other. */
+  .offer-panel {
+    background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
+    padding: 1.75rem; margin-bottom: 1.25rem;
+    display: flex; flex-wrap: wrap; align-items: center; gap: 1.25rem 2rem;
+  }
+  .offer-body { flex: 1 1 18rem; display: flex; flex-direction: column; gap: 0.6rem; }
+  .offer-body h3 { font-size: var(--fs-h3); color: var(--text); }
+  .offer-body p { color: var(--text-soft); font-size: var(--fs-small); }
+  .offer-figure {
+    display: flex; flex-direction: column; gap: 0.3rem;
+    padding-left: 2rem; border-left: 1px solid var(--border);
+  }
+  .offer-amount {
+    font-size: clamp(2rem, 6vw, 2.6rem); font-weight: 700; line-height: 1;
+    color: var(--accent-strong); font-variant-numeric: tabular-nums;
+  }
+  .offer-basis { font-size: var(--fs-small); color: var(--text-soft); }
+  /* Below the panel's natural break the divider has to move from the side to
+     the top, or it hangs in the middle of a stacked column. */
+  @media (max-width: 560px) {
+    .offer-figure {
+      flex-basis: 100%; padding-left: 0; padding-top: 1.1rem;
+      border-left: 0; border-top: 1px solid var(--border);
+    }
+  }
   .service-grid {
     display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 1.25rem;
   }
@@ -385,11 +400,6 @@
   }
   .service-card h3 { font-size: var(--fs-h3); color: var(--text); }
   .service-card p { color: var(--text-soft); font-size: var(--fs-small); flex: 1; }
-  .service-price {
-    font-size: var(--fs-small); font-weight: 600; color: var(--accent-strong);
-    font-variant-numeric: tabular-nums;
-    padding-top: 0.6rem; border-top: 1px solid var(--border);
-  }
 
   /* ---------- Process ---------- */
   .process-list {
@@ -689,27 +699,29 @@
     <section class="services reveal" id="services">
       <div class="wrap">
         <h2>Services</h2>
-        <p class="services-note">Your time is worth more than a waiting room. That&rsquo;s why we come to you &mdash; driveway, office lot, wherever your car is parked.</p>
+        <p class="services-note">One restoration, done properly, at whatever curb your car is parked against. No tiers to choose between and nothing held back for a higher price.</p>
+        <div class="offer-panel">
+          <div class="offer-body">
+            <h3>Full headlight restoration</h3>
+            <p>Wet-sanded and polished back to factory clarity, then sealed under a ceramic top coat &mdash; the whole job, at your driveway or office lot.</p>
+          </div>
+          <div class="offer-figure">
+            <span class="offer-amount">$80&ndash;$120</span>
+            <span class="offer-basis">per vehicle, by size</span>
+          </div>
+        </div>
         <div class="service-grid">
           <div class="service-card">
-            <h3>Standard Restoration</h3>
-            <p>Wet-sand and polish that clears haze and yellowing back to factory clarity. No coating, so it&rsquo;s our most affordable plan.</p>
-            <span class="service-price">$79 / pair &middot; ~45 min</span>
+            <h3>Ceramic coating included</h3>
+            <p>Every restoration finishes under a ceramic top coat that holds the clarity for years, not months. It is part of the job &mdash; there is no extra fee for it.</p>
           </div>
           <div class="service-card">
-            <h3>Premium + UV Sealant</h3>
-            <p>Everything in Standard, plus a UV-resistant sealant that holds clarity far longer against coastal sun and salt. Our most popular plan.</p>
-            <span class="service-price">$119 / pair &middot; ~60 min</span>
+            <h3>Priced by vehicle size</h3>
+            <p>Smaller cars sit at the low end of the range and larger vehicles with bigger lenses sit at the high end. Tell us what you drive and we&rsquo;ll confirm your price.</p>
           </div>
           <div class="service-card">
-            <h3>Ceramic Coating Restoration</h3>
-            <p>A ceramic top coat for the longest-lasting clarity we offer &mdash; built to hold up for years, not months.</p>
-            <span class="service-price">$179 / pair &middot; ~75 min</span>
-          </div>
-          <div class="service-card">
-            <h3>Maintenance Restoration</h3>
-            <p>A quick recoat for lenses we&rsquo;ve already restored &mdash; keeps that clarity going without a full redo.</p>
-            <span class="service-price">$45 / pair &middot; ~20 min</span>
+            <h3>Two-year warranty</h3>
+            <p>A two-year warranty on the finish can be added to your restoration. Ask about it when you book and we&rsquo;ll go through what it covers.</p>
           </div>
         </div>
       </div>

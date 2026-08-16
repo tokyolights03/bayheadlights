@@ -11,10 +11,10 @@
      block, and upload og-image.png and apple-touch-icon.png to the site root. -->
 <link rel="canonical" href="https://bayheadlights.com/">
 
-<!-- Tab icon: the ember beam mark from the header, inlined so it costs no request. -->
-<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2032%2032'%3E%3Crect%20width='32'%20height='32'%20rx='7'%20fill='%232A2013'/%3E%3Ccircle%20cx='16'%20cy='16'%20r='8'%20fill='%23D8672E'/%3E%3Ccircle%20cx='16'%20cy='16'%20r='3.5'%20fill='%23F1E4C6'/%3E%3C/svg%3E">
+<!-- Tab icon: the beam mark from the header, inlined so it costs no request. -->
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2032%2032'%3E%3Crect%20width='32'%20height='32'%20rx='7'%20fill='%230F2B46'/%3E%3Ccircle%20cx='16'%20cy='16'%20r='8'%20fill='%2374B4E4'/%3E%3Ccircle%20cx='16'%20cy='16'%20r='3.5'%20fill='%23EAF3FB'/%3E%3C/svg%3E">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-<meta name="theme-color" content="#F1E4C6">
+<meta name="theme-color" content="#0F2B46">
 
 <!-- Link previews in Messages, WhatsApp, Facebook, LinkedIn. -->
 <meta property="og:type" content="website">
@@ -94,26 +94,45 @@
 </script>
 <style>
   /* ---------- Tokens ----------
-     A warm, sand-forward coastal palette drawn from the BayHeadlights mark:
-     light sand grounds, a burnt-sunset ember/crimson pairing, brass
-     hairlines, and a seafoam accent lifted from the truck. Text is dark
-     ink-brown throughout, since every surface is now light. */
+     A two-tone blue palette: pale daylight blue grounds carrying the reading
+     surfaces, deep harbour navy for the bands that frame them (header,
+     contact, mobile nav), and a mid blue accent that darkens for emphasis.
+
+     Because two grounds now exist, --text/--text-soft/--border/--rule/--accent
+     are *surface-relative*: the light values live here and the navy bands
+     redefine them further down. Style everything through those five so a
+     component works on either ground; the fixed ink and on-navy pairs below
+     are for the rare element that sits on the opposite ground from its
+     container (the skip link, the logo plate). */
   :root {
-    --bg: #F1E4C6;
-    --bg-deep: #B8935C;
-    --surface: #FBF3DE;
-    --surface-alt: #F5EBCE;
-    --text: #2A2013;
-    --text-soft: #3D3018;
-    --border: #C2A876;
-    --ember: #D8672E;
-    --crimson: #A63A2E;
-    /* Crimson for use on --bg-deep. The tan is light enough that --crimson
-       lands at 2.26:1 there, well under WCAG AA; this darkening reaches 4.80:1
-       while still reading as the same burnt accent. */
-    --crimson-deep: #521C14;
-    --gold: #BE9A52;
-    --seafoam: #5E9C8C;
+    --bg: #D9E7F3;
+    --bg-deep: #0F2B46;
+    --surface: #F4F9FD;
+    --surface-alt: #E7F0F9;
+
+    --ink: #0E2337;
+    --ink-soft: #2A4C6B;
+    --on-deep: #EAF3FB;
+    --on-deep-soft: #B4CFE7;
+
+    --text: var(--ink);
+    --text-soft: var(--ink-soft);
+    /* Hairline for cards and dividers — deliberately soft, so it reads as an
+       edge without drawing a box. Controls use --rule instead. */
+    --border: #8FB2CE;
+    /* Every stroke that has to be *seen*: control borders, the stat rule, the
+       before/after seam. 3.14:1 on --bg, which clears the 3:1 WCAG asks of a
+       control boundary; --border is 1.77:1 and would not. */
+    --rule: #5B84A8;
+    --accent: #1E6BA8;
+    --accent-strong: #13537F;
+    --accent-cool: #4FA3D6;
+
+    /* The primary button is a fixed chip: it appears on both the pale ground
+       and the navy header, so its colours must not follow the surface. */
+    --btn-bg: #1E6BA8;
+    --btn-bg-hover: #13537F;
+    --btn-fg: #F7FBFE;
 
     --font-display: 'Didot', 'Bodoni MT', Georgia, 'Times New Roman', serif;
     --font-body: 'Optima', 'Futura', 'Century Gothic', 'Segoe UI', system-ui, -apple-system, sans-serif;
@@ -127,6 +146,20 @@
 
     --container: 1120px;
     --radius: 6px;
+  }
+
+  /* ---------- Navy bands ----------
+     The two surfaces that invert the page. Redefining the surface-relative
+     tokens here flips every descendant at once, so no component needs its own
+     on-navy rule. Custom properties inherit, so the mobile nav panel and the
+     brand frame are covered by their parents. */
+  .site-header, .contact {
+    --text: var(--on-deep);
+    --text-soft: var(--on-deep-soft);
+    --border: #35557A;
+    --rule: #6D93B6;
+    --accent: #74B4E4;
+    --accent-strong: #9CCBEE;
   }
 
   /* ---------- Reset ---------- */
@@ -150,13 +183,15 @@
   table { border-collapse: collapse; width: 100%; }
 
   :focus-visible {
-    outline: 2px solid var(--ember);
+    outline: 2px solid var(--accent);
     outline-offset: 3px;
   }
 
+  /* Sits on navy but outside both navy bands, so it names the on-navy ink
+     directly rather than inheriting the page's dark text. */
   .skip-link {
     position: absolute; left: -9999px; top: 0;
-    background: var(--bg-deep); color: var(--text); padding: 0.75rem 1.25rem; z-index: 100;
+    background: var(--bg-deep); color: var(--on-deep); padding: 0.75rem 1.25rem; z-index: 100;
   }
   .skip-link:focus { left: 1rem; top: 1rem; }
 
@@ -165,11 +200,9 @@
     font-size: var(--fs-label);
     letter-spacing: 0.14em;
     text-transform: uppercase;
-    color: var(--crimson);
+    color: var(--accent-strong);
     font-weight: 600;
   }
-  /* On the tan contact panel the accent has to darken to stay legible. */
-  .contact .eyebrow { color: var(--crimson-deep); }
 
   /* ---------- Layout helpers ---------- */
   .wrap { max-width: var(--container); margin-inline: auto; padding-inline: clamp(1.25rem, 4vw, 2.5rem); }
@@ -180,7 +213,7 @@
     position: sticky; top: 0; z-index: 50;
     background: color-mix(in srgb, var(--bg-deep) 88%, transparent);
     backdrop-filter: blur(10px);
-    border-bottom: 1px solid color-mix(in srgb, var(--gold) 22%, transparent);
+    border-bottom: 1px solid color-mix(in srgb, var(--rule) 22%, transparent);
   }
   .header-inner {
     max-width: var(--container); margin-inline: auto;
@@ -190,9 +223,9 @@
   .wordmark { display: flex; align-items: baseline; gap: 0.6rem; margin-right: auto; }
   .beam-mark {
     width: 0.6rem; height: 0.6rem; border-radius: 50%;
-    background: var(--ember);
-    box-shadow: 0 0 0 3px color-mix(in srgb, var(--ember) 25%, transparent),
-                0 0 14px 2px color-mix(in srgb, var(--ember) 55%, transparent);
+    background: var(--accent);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 25%, transparent),
+                0 0 14px 2px color-mix(in srgb, var(--accent) 55%, transparent);
     flex: none;
   }
   .wordmark-main {
@@ -206,7 +239,7 @@
   .site-nav a {
     font-size: var(--fs-small); color: var(--text-soft); transition: color 0.15s ease;
   }
-  .site-nav a:hover { color: var(--crimson); }
+  .site-nav a:hover { color: var(--accent-strong); }
   .header-cta { display: flex; align-items: center; gap: 1.1rem; }
   .phone-link {
     font-size: var(--fs-small); color: var(--text-soft); white-space: nowrap;
@@ -220,11 +253,11 @@
     width: 2.6rem; height: 2.6rem;
     align-items: center; justify-content: center;
     background: transparent; color: var(--text);
-    border: 1px solid var(--border); border-radius: var(--radius);
+    border: 1px solid var(--rule); border-radius: var(--radius);
     cursor: pointer;
     transition: border-color 0.15s ease, color 0.15s ease;
   }
-  .nav-toggle:hover { border-color: var(--crimson); color: var(--crimson); }
+  .nav-toggle:hover { border-color: var(--accent-strong); color: var(--accent-strong); }
   .nav-toggle-bars, .nav-toggle-bars::before, .nav-toggle-bars::after {
     display: block; width: 1.15rem; height: 2px;
     background: currentColor; border-radius: 1px;
@@ -247,10 +280,15 @@
     white-space: nowrap; border: 1px solid transparent;
     transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
   }
-  .btn--primary { background: var(--ember); color: #fff; }
-  .btn--primary:hover { background: var(--crimson); }
-  .btn--ghost { border-color: var(--border); color: var(--text); }
-  .btn--ghost:hover { border-color: var(--crimson); color: var(--crimson); }
+  .btn--primary { background: var(--btn-bg); color: var(--btn-fg); }
+  .btn--primary:hover { background: var(--btn-bg-hover); }
+  /* The chip keeps one colour everywhere, but on navy its fill is only 2.56:1
+     against the band: the label stays legible while the button's edge
+     disappears. A rim from the band's --rule (4.47:1) restores the boundary
+     WCAG asks for, without giving the primary action a second identity. */
+  .site-header .btn--primary, .contact .btn--primary { border-color: var(--rule); }
+  .btn--ghost { border-color: var(--rule); color: var(--text); }
+  .btn--ghost:hover { border-color: var(--accent-strong); color: var(--accent-strong); }
 
   /* ---------- Hero ---------- */
   .hero { padding-top: clamp(3rem, 8vw, 5.5rem); position: relative; overflow: hidden; }
@@ -302,18 +340,16 @@
      their text so all three still fit one row on a desktop column. */
   .quote-send .btn { cursor: pointer; }
   .quote-send .btn--primary { min-width: 200px; }
-  /* --border against the tan panel is 1.24:1 — effectively invisible. Ghost
-     buttons here take the ink border so their edge clears the 3:1 that WCAG
-     asks of a control boundary. */
-  .contact .btn--ghost { border-color: var(--text-soft); }
-  .contact .btn--ghost:hover { border-color: var(--crimson-deep); color: var(--crimson-deep); }
+  /* Ghost buttons need no on-navy special case any more: --rule and
+     --accent-strong are redefined for the band, so the base rules land at
+     4.47:1 and 8.38:1 there. */
 
   /* ---------- Explainer stats (now inside Hero) ---------- */
   .explainer-stats {
     margin-top: 2.75rem; display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem;
     text-align: left;
   }
-  .stat { border-top: 2px solid var(--gold); padding-top: 0.75rem; }
+  .stat { border-top: 2px solid var(--rule); padding-top: 0.75rem; }
   .stat-figure {
     display: block; font-family: var(--font-display); font-size: 2rem; color: var(--text);
     font-variant-numeric: tabular-nums;
@@ -339,13 +375,13 @@
   }
   .service-card:hover {
     transform: translateY(-6px);
-    box-shadow: 0 16px 30px rgba(42,32,19,0.18);
-    border-color: var(--crimson);
+    box-shadow: 0 16px 30px rgba(14,35,55,0.18);
+    border-color: var(--accent-strong);
   }
   .service-card h3 { font-size: var(--fs-h3); color: var(--text); }
   .service-card p { color: var(--text-soft); font-size: var(--fs-small); flex: 1; }
   .service-price {
-    font-size: var(--fs-small); font-weight: 600; color: var(--crimson);
+    font-size: var(--fs-small); font-weight: 600; color: var(--accent-strong);
     font-variant-numeric: tabular-nums;
     padding-top: 0.6rem; border-top: 1px solid var(--border);
   }
@@ -366,9 +402,9 @@
   }
   .step-num {
     width: 2.6rem; height: 2.6rem; border-radius: 50%;
-    border: 1.5px solid var(--crimson);
+    border: 1.5px solid var(--accent-strong);
     display: flex; align-items: center; justify-content: center;
-    font-family: var(--font-display); color: var(--crimson); font-size: 1.05rem;
+    font-family: var(--font-display); color: var(--accent-strong); font-size: 1.05rem;
     background: var(--bg); position: relative; z-index: 1; flex: none;
     transition: transform 0.25s ease, box-shadow 0.25s ease;
   }
@@ -376,9 +412,9 @@
   .step-body p { margin-top: 0.3rem; color: var(--text-soft); font-size: var(--fs-small); }
   .process-step:hover .step-num {
     transform: scale(1.12);
-    box-shadow: 0 8px 16px rgba(42,32,19,0.2);
+    box-shadow: 0 8px 16px rgba(14,35,55,0.2);
   }
-  .process-step:hover .step-body h3 { color: var(--crimson); }
+  .process-step:hover .step-body h3 { color: var(--accent-strong); }
 
   /* ---------- Gallery ---------- */
   .gallery-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; }
@@ -389,8 +425,8 @@
   }
   .gallery-card:hover {
     transform: translateY(-6px);
-    box-shadow: 0 16px 30px rgba(42,32,19,0.18);
-    border-color: var(--crimson);
+    box-shadow: 0 16px 30px rgba(14,35,55,0.18);
+    border-color: var(--accent-strong);
   }
   .gallery-swatch, .gallery-photo { position: relative; aspect-ratio: 4 / 3; display: flex; }
   .gallery-photo { overflow: hidden; }
@@ -407,14 +443,14 @@
     position: absolute; top: 0.5rem; z-index: 1;
     font-size: var(--fs-label); text-transform: uppercase; letter-spacing: 0.08em;
     padding: 0.15rem 0.55rem; border-radius: 999px;
-    background: rgba(20,14,8,0.6); color: #F5EBD9;
+    background: rgba(8,22,38,0.62); color: var(--on-deep);
   }
   .swatch-half--before .swatch-tag { left: 0.5rem; }
   .swatch-half--after .swatch-tag {
     right: 0.5rem;
-    background: color-mix(in srgb, var(--seafoam) 55%, rgba(20,14,8,0.6) 45%);
+    background: color-mix(in srgb, var(--accent-cool) 55%, rgba(8,22,38,0.62) 45%);
   }
-  .swatch-seam { position: absolute; top: 0; bottom: 0; left: 50%; width: 1px; background: var(--gold); opacity: 0.7; }
+  .swatch-seam { position: absolute; top: 0; bottom: 0; left: 50%; width: 1px; background: var(--rule); opacity: 0.7; }
   .gallery-caption { padding: 1rem 1.1rem 1.2rem; }
   .gallery-caption h3 { font-size: 1rem; font-family: var(--font-body); font-weight: 700; color: var(--text); }
   .gallery-caption span { display: block; margin-top: 0.25rem; font-size: var(--fs-small); color: var(--text-soft); }
@@ -434,8 +470,8 @@
     font-size: var(--fs-small); font-weight: 600; white-space: nowrap;
   }
   .areas-note { margin-top: 1.9rem; font-size: var(--fs-small); color: var(--text-soft); }
-  .areas-note a { color: var(--crimson); text-decoration: underline; text-underline-offset: 3px; }
-  .areas-note a:hover { color: var(--ember); }
+  .areas-note a { color: var(--accent-strong); text-decoration: underline; text-underline-offset: 3px; }
+  .areas-note a:hover { color: var(--accent); }
 
   /* ---------- Contact ---------- */
   .contact { background: var(--bg-deep); color: var(--text); }
@@ -445,19 +481,23 @@
   .contact-info dt { color: var(--text-soft); text-transform: uppercase; letter-spacing: 0.08em; font-size: var(--fs-label); padding-top: 0.15rem; }
   .contact-info dd { margin: 0; color: var(--text); }
 
-  /* Logo sits as a small lit plate inside a dark, brass-edged frame —
+  /* Logo sits as a small lit plate inside a deep navy, blue-edged frame —
      the one deliberate, minimal use of a light surface on the page. */
   .brand-mark {
     aspect-ratio: 1 / 1; border-radius: 16px; position: relative;
     background: var(--bg-deep);
-    border: 1px solid color-mix(in srgb, var(--gold) 30%, transparent);
+    border: 1px solid color-mix(in srgb, var(--rule) 30%, transparent);
     display: flex; align-items: center; justify-content: center; padding: 2rem;
   }
+  /* A light plate inside the navy band: the only place on the page where the
+     ground flips back, so it restores the ink pair for its caption. */
   .brand-plate {
+    --text: var(--ink);
+    --text-soft: var(--ink-soft);
     background: var(--surface);
     border-radius: 10px; padding: 1.5rem 1.75rem; max-width: 78%;
     display: flex; flex-direction: column; align-items: center; gap: 0.9rem;
-    box-shadow: 0 24px 48px rgba(0,0,0,0.25);
+    box-shadow: 0 24px 48px rgba(6,18,32,0.32);
   }
   .brand-logo { width: 100%; max-width: 190px; height: auto; object-fit: contain; }
   .brand-caption {
@@ -478,7 +518,7 @@
     font-size: var(--fs-small); color: var(--text-soft);
   }
   .footer-links a { display: inline-flex; align-items: center; gap: 0.4rem; }
-  .footer-links a:hover { color: var(--crimson); }
+  .footer-links a:hover { color: var(--accent-strong); }
   .footer-social svg { width: 1rem; height: 1rem; flex: none; }
   .footer-copy { font-size: var(--fs-label); color: var(--text-soft); width: 100%; padding-top: 1.25rem; border-top: 1px solid var(--border); }
 
@@ -501,14 +541,14 @@
       flex-direction: column; gap: 0;
       padding: 0.25rem clamp(1.25rem, 4vw, 2.5rem) 0.75rem;
       background: var(--bg-deep);
-      border-bottom: 1px solid color-mix(in srgb, var(--gold) 22%, transparent);
-      box-shadow: 0 16px 24px rgba(42,32,19,0.16);
+      border-bottom: 1px solid color-mix(in srgb, var(--rule) 22%, transparent);
+      box-shadow: 0 16px 24px rgba(14,35,55,0.16);
     }
     .site-nav.is-open { display: flex; }
     .site-nav a {
       padding: 0.85rem 0.15rem;
       font-size: var(--fs-body);
-      border-top: 1px solid color-mix(in srgb, var(--gold) 20%, transparent);
+      border-top: 1px solid color-mix(in srgb, var(--rule) 20%, transparent);
     }
     .site-nav a:first-child { border-top: 0; }
     .contact-grid { grid-template-columns: 1fr; }
@@ -572,31 +612,31 @@
       <svg class="hero-scene" viewBox="0 0 1200 420" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
         <defs>
           <linearGradient id="skyGrad" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stop-color="#D8672E" stop-opacity="0"/>
-            <stop offset="55%" stop-color="#D8672E" stop-opacity="0"/>
-            <stop offset="100%" stop-color="#D8672E" stop-opacity="0.4"/>
+            <stop offset="0%" stop-color="#1E6BA8" stop-opacity="0"/>
+            <stop offset="55%" stop-color="#1E6BA8" stop-opacity="0"/>
+            <stop offset="100%" stop-color="#1E6BA8" stop-opacity="0.38"/>
           </linearGradient>
           <linearGradient id="sandGrad" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stop-color="#D9C29B" stop-opacity="0.9"/>
-            <stop offset="100%" stop-color="#CBB88F" stop-opacity="0.95"/>
+            <stop offset="0%" stop-color="#BCD3E6" stop-opacity="0.9"/>
+            <stop offset="100%" stop-color="#A6C1DA" stop-opacity="0.95"/>
           </linearGradient>
           <linearGradient id="oceanGrad" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stop-color="#6FAF9E" stop-opacity="0.55"/>
-            <stop offset="100%" stop-color="#3E6E62" stop-opacity="0.85"/>
+            <stop offset="0%" stop-color="#3F8CC4" stop-opacity="0.55"/>
+            <stop offset="100%" stop-color="#124C79" stop-opacity="0.85"/>
           </linearGradient>
-          <path id="frond" d="M0,0 C14,-10 46,-16 78,-11 C50,-4 22,0 0,0 Z" fill="#0B0908"/>
+          <path id="frond" d="M0,0 C14,-10 46,-16 78,-11 C50,-4 22,0 0,0 Z" fill="#08192A"/>
         </defs>
 
         <rect width="1200" height="420" fill="url(#skyGrad)"/>
         <rect x="0" y="300" width="1200" height="45" fill="url(#sandGrad)"/>
         <rect x="0" y="345" width="1200" height="75" fill="url(#oceanGrad)"/>
         <path d="M0,360 Q50,350 100,360 T200,360 T300,360 T400,360 T500,360 T600,360 T700,360 T800,360 T900,360 T1000,360 T1100,360 T1200,360"
-          fill="none" stroke="#8FC4B4" stroke-opacity="0.35" stroke-width="2"/>
+          fill="none" stroke="#A9D2EE" stroke-opacity="0.35" stroke-width="2"/>
         <path d="M0,378 Q50,370 100,378 T200,378 T300,378 T400,378 T500,378 T600,378 T700,378 T800,378 T900,378 T1000,378 T1100,378 T1200,378"
-          fill="none" stroke="#8FC4B4" stroke-opacity="0.25" stroke-width="2"/>
+          fill="none" stroke="#A9D2EE" stroke-opacity="0.25" stroke-width="2"/>
 
         <g class="palm-sway" style="transform-origin: 210px 345px;">
-          <path d="M210,345 C218,285 198,220 222,145" fill="none" stroke="#0B0908" stroke-width="13" stroke-linecap="round"/>
+          <path d="M210,345 C218,285 198,220 222,145" fill="none" stroke="#08192A" stroke-width="13" stroke-linecap="round"/>
           <g transform="translate(222,145)">
             <use href="#frond" transform="rotate(-75) scale(1.35)"/>
             <use href="#frond" transform="rotate(-40) scale(1.35)"/>
@@ -608,7 +648,7 @@
         </g>
 
         <g class="palm-sway palm-sway--b" style="transform-origin: 990px 345px;">
-          <path d="M990,345 C982,285 1002,220 978,145" fill="none" stroke="#0B0908" stroke-width="13" stroke-linecap="round"/>
+          <path d="M990,345 C982,285 1002,220 978,145" fill="none" stroke="#08192A" stroke-width="13" stroke-linecap="round"/>
           <g transform="translate(978,145)">
             <use href="#frond" transform="rotate(-100) scale(-1.35,1.35)"/>
             <use href="#frond" transform="rotate(-65) scale(-1.35,1.35)"/>

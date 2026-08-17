@@ -1,18 +1,22 @@
 # Netlify build settings.
 #
-# There is no build step: the repository root IS the site. Declaring that
-# explicitly stops Netlify from inspecting the repo, guessing a framework, and
-# failing on a build command that was never needed.
+# There is no build step: the repository root IS the site, so `publish` points
+# at it and no build command is declared at all. Declaring publish explicitly
+# stops Netlify inspecting the repo, guessing a framework, and failing on a
+# build that was never needed.
+#
+# Deliberately minimal. An earlier version added a [build.ignore] table to skip
+# no-op deploys - that is not valid Netlify syntax (`ignore` is a key inside
+# [build], not a subtable), and a marketing site that deploys a handful of
+# times a month does not need the optimisation anyway.
 #
 # 404.html is picked up automatically for unmatched paths - no redirect rule
-# required. The www -> apex redirect is NOT configured here on purpose: set the
-# apex as the primary domain in Netlify's Domain management panel and Netlify
-# issues that redirect itself. A hand-written rule here would race with it.
+# required. Response headers live in _headers, which Cloudflare Pages also
+# reads, so they survive a change of host.
+#
+# The www -> apex redirect is NOT set here on purpose: make the apex the
+# primary domain in Netlify's Domain management panel and Netlify issues that
+# redirect itself. A hand-written rule would race with it.
 
 [build]
   publish = "."
-  command = ""
-
-# Ignore builds triggered by commits that change nothing Netlify serves.
-[build.ignore]
-  command = "git diff --quiet HEAD^ HEAD -- . ':(exclude)CLAUDE.md'"

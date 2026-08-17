@@ -1,5 +1,6 @@
-# Response headers. Netlify and Cloudflare Pages both read this file, so it
-# survives a change of host; netlify.toml deliberately does not restate it.
+# Response headers. The Cloudflare Worker reads this file as configuration and
+# never serves it. The format is a portable convention that other static hosts
+# read too, so it survives a change of host.
 
 /*
   # This site never asks for any of these, so deny them outright rather than

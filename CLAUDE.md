@@ -20,7 +20,6 @@ Supporting files, each with a header comment explaining itself:
 | `_headers` | Security and caching headers; Cloudflare consumes it, never serves it |
 | `wrangler.jsonc` | Pins the Worker name and makes `404.html` serve on unmatched paths |
 | `.assetsignore` | Keeps repo files (`CLAUDE.md`, config) from being served publicly |
-| `netlify.toml` | Dead weight — kept only in case Netlify is ever revisited |
 
 ## Response formatting
 

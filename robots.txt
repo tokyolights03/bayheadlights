@@ -1,5 +1,3 @@
-# DEPLOY: the Sitemap line below points at the placeholder host
-# bayheadlights.com. Replace it with the real domain before going live.
 User-agent: *
 Allow: /
 

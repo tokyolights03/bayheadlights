@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- DEPLOY: <loc> points at the placeholder host bayheadlights.com. Replace it
-     with the real domain before going live, and bump <lastmod> whenever the
-     page content meaningfully changes. -->
+<!-- One page, one entry. Bump <lastmod> whenever the page content meaningfully
+     changes; leaving it stale tells crawlers there is nothing new to fetch. -->
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://bayheadlights.com/</loc>
-    <lastmod>2026-08-16</lastmod>
+    <lastmod>2026-08-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>

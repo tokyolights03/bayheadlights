@@ -4,11 +4,14 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Mobile Headlight Restoration in Monterey Bay | BayHeadlights</title>
-<meta name="description" content="Mobile headlight restoration in Monterey, Carmel, Pacific Grove, Seaside and Hollister. We come to you and clear cloudy lenses. $80&ndash;$120 with ceramic coating included.">
+<meta name="description" content="Mobile headlight restoration in Monterey, Carmel, Pacific Grove, Seaside and Hollister. We come to you. $80&ndash;$120, ceramic coating included.">
 
-<!-- DEPLOY: every absolute URL below points at bayheadlights.com. If the site
-     goes live on a different domain, replace that host everywhere in this head
-     block, and upload og-image.png and apple-touch-icon.png to the site root. -->
+<!-- Absolute URLs below point at bayheadlights.com, the registered domain.
+     og-image.png and apple-touch-icon.png are referenced by absolute and
+     root-relative URL respectively, so both must sit at the site root or link
+     previews and the iOS home-screen icon break. Serve over https and keep
+     one canonical host: if www.bayheadlights.com also resolves, redirect it
+     to the apex rather than letting both answer. -->
 <link rel="canonical" href="https://bayheadlights.com/">
 
 <!-- Tab icon: the beam mark from the header, inlined so it costs no request. -->
@@ -548,6 +551,10 @@
   .footer-links a:hover { color: var(--accent-strong); }
   .footer-social svg { width: 1rem; height: 1rem; flex: none; }
   .footer-copy { font-size: var(--fs-label); color: var(--text-soft); width: 100%; padding-top: 1.25rem; border-top: 1px solid var(--border); }
+  /* Underlined so they read as tappable: at label size, colour alone is too
+     weak a cue that the number and address are live links. */
+  .footer-copy a { text-decoration: underline; text-underline-offset: 2px; }
+  .footer-copy a:hover { color: var(--accent-strong); }
 
   /* ---------- Responsive ---------- */
   @media (min-width: 720px) {
@@ -768,11 +775,11 @@
           </div>
           <div class="gallery-card">
             <div class="gallery-photo">
-              <img src="gallery-sienna.webp" width="680" height="383" alt="Toyota Sienna minivan serviced on location, headlights restored" loading="lazy">
+              <img src="gallery-sienna.webp" width="680" height="383" alt="Toyota Sienna on location, mid-job: the driver-side headlight is still yellow and hazy while the passenger-side lens is finished and clear" loading="lazy">
             </div>
             <div class="gallery-caption">
               <h3>Toyota Sienna</h3>
-              <span>On-location restoration</span>
+              <span>Mid-job &mdash; one lens finished, one untouched</span>
             </div>
           </div>
         </div>
@@ -895,7 +902,10 @@
           Instagram
         </a>
       </nav>
-      <p class="footer-copy">&copy; <span id="year">2026</span> BayHeadlights &middot; (831) 833-9309 &middot; bayheadlights@gmail.com</p>
+      <!-- Both are tappable: the footer sits outside every .reveal section, so
+           on a phone this is the one contact route that is always on screen
+           regardless of scroll position or whether the reveal script ran. -->
+      <p class="footer-copy">&copy; <span id="year">2026</span> BayHeadlights &middot; <a href="tel:+18318339309">(831) 833-9309</a> &middot; <a href="mailto:bayheadlights@gmail.com">bayheadlights@gmail.com</a></p>
     </div>
   </footer>
 </div>

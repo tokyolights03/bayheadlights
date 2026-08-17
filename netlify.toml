@@ -1,0 +1,18 @@
+# Netlify build settings.
+#
+# There is no build step: the repository root IS the site. Declaring that
+# explicitly stops Netlify from inspecting the repo, guessing a framework, and
+# failing on a build command that was never needed.
+#
+# 404.html is picked up automatically for unmatched paths - no redirect rule
+# required. The www -> apex redirect is NOT configured here on purpose: set the
+# apex as the primary domain in Netlify's Domain management panel and Netlify
+# issues that redirect itself. A hand-written rule here would race with it.
+
+[build]
+  publish = "."
+  command = ""
+
+# Ignore builds triggered by commits that change nothing Netlify serves.
+[build.ignore]
+  command = "git diff --quiet HEAD^ HEAD -- . ':(exclude)CLAUDE.md'"

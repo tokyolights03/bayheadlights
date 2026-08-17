@@ -1,0 +1,35 @@
+# Response headers. Netlify and Cloudflare Pages both read this file, so it
+# survives a change of host; netlify.toml deliberately does not restate it.
+
+/*
+  # This site never asks for any of these, so deny them outright rather than
+  # leaving the browser to prompt if a script ever tries.
+  Permissions-Policy: camera=(), microphone=(), geolocation=(), interest-cohort=()
+  # Stop a browser second-guessing a declared Content-Type.
+  X-Content-Type-Options: nosniff
+  # Framing is allowed same-origin only: nothing here needs embedding
+  # elsewhere, and denying it outright breaks local preview harnesses.
+  X-Frame-Options: SAMEORIGIN
+  Referrer-Policy: strict-origin-when-cross-origin
+  # One year, but deliberately without preload: preload is effectively
+  # irreversible, and this is a new domain that may still move hosts.
+  Strict-Transport-Security: max-age=31536000; includeSubDomains
+
+# Images are cached for a day, then revalidated in the background so a repeat
+# visitor still gets a fast page while any replacement is fetched. NOT
+# immutable: these filenames are not content-hashed, so "More added after
+# every job" would otherwise leave old photos pinned in caches for a year.
+/*.webp
+  Cache-Control: public, max-age=86400, stale-while-revalidate=604800
+
+/*.png
+  Cache-Control: public, max-age=86400, stale-while-revalidate=604800
+
+# The HTML carries the phone number, the price and the contact buttons. It is
+# 46KB and revalidates cheaply, so correctness beats caching here: a stale
+# price is worse than an extra round trip.
+/index.html
+  Cache-Control: public, max-age=0, must-revalidate
+
+/404.html
+  Cache-Control: public, max-age=0, must-revalidate

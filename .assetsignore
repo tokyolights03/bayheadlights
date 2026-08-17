@@ -1,0 +1,15 @@
+# Files in the repo that are not part of the website.
+#
+# The assets directory is the repository root, so without this list every one of
+# these is uploaded and served publicly - CLAUDE.md, netlify.toml and .gitignore
+# were all returning 200 on the live site. Config and working notes have no
+# business being fetchable from a marketing page.
+#
+# gitignore syntax. _headers is absent deliberately: Cloudflare consumes it as
+# configuration and already declines to serve it.
+
+CLAUDE.md
+netlify.toml
+wrangler.jsonc
+.assetsignore
+.gitignore

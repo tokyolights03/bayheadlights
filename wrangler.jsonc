@@ -1,0 +1,23 @@
+{
+  // Cloudflare Workers static-asset config.
+  //
+  // Builds already succeeded without this file, because Cloudflare generates an
+  // implicit config when none is present. It is declared explicitly here for one
+  // reason the implicit version cannot express: not_found_handling. Without it an
+  // unmatched URL returns a bare 404 with an empty body, and 404.html - which is
+  // deployed and works when requested directly - never gets served.
+  //
+  // "name" must keep matching the existing Worker, or a deploy creates a second
+  // one instead of updating this one.
+  "name": "bayheadlights",
+  "compatibility_date": "2026-08-17",
+
+  "assets": {
+    // The repository root is the site. Exclusions live in .assetsignore rather
+    // than here, so the list stays readable and travels with the assets.
+    "directory": "./",
+    // Serve 404.html for any path that matches no file, which is what makes the
+    // branded error page reachable the way a visitor actually arrives at it.
+    "not_found_handling": "404-page"
+  }
+}

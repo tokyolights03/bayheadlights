@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Page not found | BayHeadlights</title>
+<!-- A 404 must never be indexed, even if something links to it. -->
+<meta name="robots" content="noindex">
+
+<!-- Same beam mark as index.html, inlined so this page costs one request. -->
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2032%2032'%3E%3Crect%20width='32'%20height='32'%20rx='7'%20fill='%230F2B46'/%3E%3Ccircle%20cx='16'%20cy='16'%20r='8'%20fill='%2374B4E4'/%3E%3Ccircle%20cx='16'%20cy='16'%20r='3.5'%20fill='%23EAF3FB'/%3E%3C/svg%3E">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta name="theme-color" content="#0F2B46">
+
+<!-- Deliberately self-contained: index.html keeps its CSS inline, so there is
+     no shared stylesheet to link. Only the tokens this page needs are repeated
+     here; they must stay in step with the :root block there. -->
+<style>
+  :root {
+    --bg-deep: #0F2B46;
+    --on-deep: #EAF3FB;
+    --on-deep-soft: #C2D9ED;
+    --rule: #6D93B6;
+    --accent-strong: #ADD5F1;
+    --btn-bg: #1A6199;
+    --btn-bg-hover: #0D4267;
+    --btn-fg: #F7FBFE;
+    --font-display: 'Didot', 'Bodoni MT', Georgia, 'Times New Roman', serif;
+    --font-body: 'Optima', 'Futura', 'Century Gothic', 'Segoe UI', system-ui, -apple-system, sans-serif;
+    --radius: 6px;
+  }
+  *, *::before, *::after { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0; min-height: 100vh;
+    display: flex; align-items: center; justify-content: center;
+    padding: 2rem 1.5rem;
+    background: var(--bg-deep); color: var(--on-deep);
+    font-family: var(--font-body); font-size: 1.05rem; line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    text-align: center;
+  }
+  .panel { max-width: 34rem; }
+  .beam-mark {
+    width: 0.6rem; height: 0.6rem; border-radius: 50%; margin: 0 auto 1.75rem;
+    background: var(--accent-strong);
+    box-shadow: 0 0 0 3px rgba(173,213,241,0.25), 0 0 14px 2px rgba(173,213,241,0.55);
+  }
+  .code {
+    font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--accent-strong); font-weight: 600; margin: 0;
+  }
+  h1 {
+    font-family: var(--font-display); font-weight: 400; margin: 0.9rem 0 0;
+    font-size: clamp(1.9rem, 4vw + 1rem, 2.9rem); line-height: 1.1; text-wrap: balance;
+  }
+  p.lede { margin: 1.1rem 0 0; color: var(--on-deep-soft); }
+  .actions {
+    margin-top: 2.25rem; display: flex; flex-wrap: wrap; gap: 0.75rem; justify-content: center;
+  }
+  .btn {
+    display: inline-flex; align-items: center; justify-content: center;
+    padding: 0.72rem 1.4rem; border-radius: var(--radius);
+    font-size: 0.9rem; font-weight: 600; text-decoration: none;
+    border: 1px solid var(--rule);
+    transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+  }
+  .btn--primary { background: var(--btn-bg); color: var(--btn-fg); }
+  .btn--primary:hover { background: var(--btn-bg-hover); }
+  .btn--ghost { color: var(--on-deep); }
+  .btn--ghost:hover { border-color: var(--accent-strong); color: var(--accent-strong); }
+  :focus-visible { outline: 2px solid var(--accent-strong); outline-offset: 3px; }
+  @media (prefers-reduced-motion: reduce) {
+    * { transition: none !important; animation: none !important; }
+  }
+</style>
+</head>
+<body>
+  <main class="panel">
+    <div class="beam-mark" aria-hidden="true"></div>
+    <p class="code">Error 404</p>
+    <h1>That page isn&rsquo;t here</h1>
+    <p class="lede">The link may be out of date. Everything about BayHeadlights &mdash; pricing, the process, and the service area &mdash; lives on a single page.</p>
+    <div class="actions">
+      <a class="btn btn--primary" href="/">Back to the site</a>
+      <a class="btn btn--ghost" href="tel:+18318339309">Call (831) 833-9309</a>
+    </div>
+  </main>
+</body>
+</html>
